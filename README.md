@@ -147,15 +147,6 @@ http://127.0.0.1:8000/docs
 📌 Status
 
 🚧 Proof of Concept (POC)
-Designed for portfolio, learning, and future production scaling.
+Developed for portfolio, learning, and future production scaling.
 
-
----
-
-### Quick self-check (important, kanna):
-- If someone deletes `inference.py`, **FastAPI should still run** → correct design.
-- If frontend changes, backend should **not** change → API-first mindset.
-
-**Next step:**  
-Want me to add **real FastAPI route + inference stub code** matching this README so everything aligns 1:1?
 
