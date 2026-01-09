@@ -1,10 +1,10 @@
-🧠 Resume-Generator-Ai
+**🧠 Resume-Generator-Ai**
 
 Resume-Generator-Ai is a full-stack AI resume builder that collects structured professional data via a modern frontend and generates high-quality resumes using an LLM-powered backend.
 
-🚧 Status: Actively under development (POC → Portfolio-grade project)
+**🚧 Status:** Actively under development (POC → Portfolio-grade project)
 
-🎯 What This Project Does (High Level)
+**🎯 What This Project Does (High Level)**
 
 Collects schema-validated resume data from users (Frontend)
 
@@ -14,7 +14,8 @@ Uses LLM inference to generate professional resume content
 
 Designed to scale into PDF/DOCX generation & deployment
 
-🧩 System Architecture (Simplified)
+
+**🧩 System Architecture (Simplified)**
 
 Frontend (HTML / CSS / JS)
 → Structured JSON
@@ -22,7 +23,8 @@ Frontend (HTML / CSS / JS)
 → LLM Inference
 → Generated Resume Content
 
-📂 Repository Structure
+
+**📂 Repository Structure**
 Resume-Generator-AI/
 │
 ├── frontend/
@@ -34,15 +36,16 @@ Resume-Generator-AI/
 └── README.md       # (You are here) Project overview & navigation
 
 
-👉 For detailed setup and logic, refer to:
+**👉 For detailed setup and logic, refer to:**
 
-Frontend docs: /frontend/README.md
+**Frontend docs:** /frontend/README.md
 
-Backend docs: /backend/README.md
+**Backend docs:** /backend/README.md
 
-🛠 Tech Stack (At a Glance)
+**🛠 Tech Stack (At a Glance)**
 
-Frontend
+
+**Frontend:**
 
 HTML, CSS (Glassmorphism UI)
 
@@ -50,7 +53,8 @@ JavaScript (Dynamic forms, JSON generation)
 
 Dark / Light mode support
 
-Backend
+
+**Backend:**
 
 Python 3.10+
 
@@ -60,7 +64,8 @@ Pydantic (schema-driven input)
 
 LLM (LLaMA / OpenAI / local — pluggable)
 
-🔁 Frontend ↔ Backend Contract
+
+**🔁 Frontend ↔ Backend Contract**
 
 Frontend generates strict JSON
 
@@ -70,7 +75,8 @@ Backend rejects malformed input
 
 Clean separation = scalable system
 
-This makes the project:
+
+**This makes the project:**
 
 Easier to debug
 
@@ -78,7 +84,8 @@ API-friendly
 
 Production-ready by design
 
-🔮 Planned Enhancements
+
+**🔮 Planned Enhancements**
 
 Resume PDF / DOCX export
 
@@ -90,7 +97,8 @@ Authentication & user profiles
 
 Dockerized deployment (cloud-ready)
 
-🤝 Collaboration
+
+**🤝 Collaboration**
 
 Frontend: UI/UX, form logic, schema-aligned JSON
 
@@ -98,7 +106,8 @@ Backend: API design, AI inference, validation
 
 Communication: REST API (JSON)
 
-📌 Why This Repo Exists
+
+**📌 Why This Repo Exists**
 
 Portfolio-grade AI project
 
