@@ -1,152 +1,107 @@
-# Resume-Gnenerator-AI
-Llama3 LLM powered AI Resume Generator for hassel free resumes! 
+🧠 Resume-Generator-Ai
 
-An AI-powered resume generation backend that converts structured user inputs into a professionally formatted resume using LLM inference.  
-Built as a modular, API-first service to easily integrate with any frontend (HTML/CSS/React).
+Resume-Generator-Ai is a full-stack AI resume builder that collects structured professional data via a modern frontend and generates high-quality resumes using an LLM-powered backend.
 
----
+🚧 Status: Actively under development (POC → Portfolio-grade project)
 
-## 🚀 Project Overview
+🎯 What This Project Does (High Level)
 
-This project focuses on the **AI inference and API layer** for resume generation.  
-Frontend (HTML/CSS) is handled separately and communicates with this backend via HTTP requests.
+Collects schema-validated resume data from users (Frontend)
 
-Core goals:
-- Clean schema-driven input (Pydantic)
-- LLM-based resume content generation
-- Easy integration with web or mobile frontends
-- Scalable, production-style structure
+Sends clean JSON to an API-first AI backend
 
----
+Uses LLM inference to generate professional resume content
 
-## 🧠 Architecture (High Level)
+Designed to scale into PDF/DOCX generation & deployment
 
-Frontend (HTML/CSS)
-|
-| JSON (POST request)
-v
-FastAPI (app.py)
-|
-v
-Inference Logic (inference.py)
-|
-v
-LLM / Resume Template Logic
+🧩 System Architecture (Simplified)
 
+Frontend (HTML / CSS / JS)
+→ Structured JSON
+→ FastAPI Backend
+→ LLM Inference
+→ Generated Resume Content
 
----
-
-## 📂 Folder Structure
-
-resume_generator_ai/
+📂 Repository Structure
+Resume-Generator-AI/
 │
-├── app.py # FastAPI entry point (API routes)
-├── inference.py # Resume generation logic (AI inference)
-├── schema.py # Pydantic models for input/output validation
-├── requirements.txt
-└── README.md
+├── frontend/
+│   └── README.md   # UI, form logic, JSON schema output
+│
+├── backend/
+│   └── README.md   # FastAPI, schema validation, AI inference
+│
+└── README.md       # (You are here) Project overview & navigation
 
 
----
+👉 For detailed setup and logic, refer to:
 
-## 🧩 File Responsibilities
+Frontend docs: /frontend/README.md
 
-### `app.py`
-- Creates FastAPI app
-- Defines API endpoints (e.g., `/generate-resume`)
-- Receives validated input from `schema.py`
-- Calls inference functions from `inference.py`
+Backend docs: /backend/README.md
 
-### `schema.py`
-- Defines structured input using **Pydantic**
-- Ensures clean, validated data (no messy raw JSON)
-- Acts as a contract between frontend & backend
+🛠 Tech Stack (At a Glance)
 
-### `inference.py`
-- Core AI logic lives here
-- Converts structured data → prompt → resume content
-- Is independent of FastAPI (pure Python logic)
+Frontend
 
----
+HTML, CSS (Glassmorphism UI)
 
-## 🔁 How Files Are Connected
+JavaScript (Dynamic forms, JSON generation)
 
-- `app.py` **imports** schemas from `schema.py`
-- `app.py` **imports and calls** functions from `inference.py`
-- `inference.py` does **not** talk to FastAPI directly (clean separation)
+Dark / Light mode support
 
-Example flow:
+Backend
 
-POST request → app.py → schema validation → inference.py → response
+Python 3.10+
 
+FastAPI
 
----
+Pydantic (schema-driven input)
 
-## 📡 API Endpoint (Example)
+LLM (LLaMA / OpenAI / local — pluggable)
 
-**POST** `/generate-resume`
+🔁 Frontend ↔ Backend Contract
 
-**Request Body (JSON):**
-```json
-{
-  "name": "John Doe",
-  "skills": ["Python", "Machine Learning"],
-  "experience": "2 years in data science",
-  "education": "MCA"
-}
+Frontend generates strict JSON
 
-Response:
+JSON must match backend schema.py
 
-{
-  "resume_text": "Generated professional resume content..."
-}
+Backend rejects malformed input
 
-🛠 Tech Stack
+Clean separation = scalable system
 
-    Python 3.10+
+This makes the project:
 
-    FastAPI
+Easier to debug
 
-    Pydantic
+API-friendly
 
-    LLM (LLaMA / OpenAI / local model — pluggable)
+Production-ready by design
 
-🧪 Local Setup
+🔮 Planned Enhancements
 
-pip install -r requirements.txt
-uvicorn app:app --reload
+Resume PDF / DOCX export
 
-API will be live at:
+Multiple resume templates
 
-http://127.0.0.1:8000
+OCR-based resume input
 
-Swagger UI:
+Authentication & user profiles
 
-http://127.0.0.1:8000/docs
-
-🔮 Future Enhancements
-
-    PDF / DOCX resume export
-
-    Multiple resume templates
-
-    OCR-based resume input
-
-    User authentication
-
-    Deployment using Docker + cloud
+Dockerized deployment (cloud-ready)
 
 🤝 Collaboration
 
-    Backend / AI: Resume Generator AI
+Frontend: UI/UX, form logic, schema-aligned JSON
 
-    Frontend: HTML/CSS handled separately
+Backend: API design, AI inference, validation
 
-    Communication via REST API
+Communication: REST API (JSON)
 
-📌 Status
+📌 Why This Repo Exists
 
-🚧 Proof of Concept (POC)
-Developed for portfolio, learning, and future production scaling.
+Portfolio-grade AI project
 
+Demonstrates system design + AI integration
 
+Proof of concept for real-world AI services
