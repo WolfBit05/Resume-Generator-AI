@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumAI Pro | Professional AI Resume Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="logo-icon">✦</div>
+                        <h1>ResumAI<span>Pro</span></h1>
+                    </div>
+                    <div class="header-status">
+                        <span class="status-dot"></span> Schema Validated
+                    </div>
+                </div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <span class="icon">☀️</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-container">
+            <div id="chat-window">
+                <div id="messages">
+                    <div class="message bot">
+                        <div class="avatar">AI</div>
+                        <div class="bubble">
+                            <p>Welcome. I am your AI Career Strategist.</p>
+                            <p class="secondary">You can now toggle between <b>Night</b> and <b>Day</b> mode using the icon in the top right corner.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="choice-container" class="message">
+                        <div class="mode-grid">
+                            <button class="mode-card" id="btn-detailed">
+                                <div class="card-icon">✎</div>
+                                <div class="card-text">
+                                    <h3>Detailed Form</h3>
+                                    <p>Structured entry (Schema Compliant).</p>
+                                </div>
+                            </button>
+                            <button class="mode-card" id="btn-quick">
+                                <div class="card-icon">⚡</div>
+                                <div class="card-text">
+                                    <h3>Quick Sync</h3>
+                                    <p>Paste text or upload files.</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="form-overlay" class="hidden">
+                <form id="resume-form">
+                    <div class="form-header">
+                        <button type="button" id="back-to-chat" class="back-link">← Return</button>
+                        <h2 id="form-title">Professional Profile</h2>
+                    </div>
+
+                    <div class="photo-upload-section">
+                        <label>Passport Size Photo</label>
+                        <div class="photo-upload-container" id="photo-dropzone">
+                            <input type="file" id="photo-input" accept="image/*" hidden>
+                            <div class="photo-preview" id="photo-preview">
+                                <span class="plus-icon">+</span>
+                                <p>Upload Photo</p>
+                            </div>
+                        </div>
+                        <p class="field-hint">PNG or JPG. Recommended: Professional headshot.</p>
+                    </div>
+
+                    <div id="detailed-fields" class="form-section hidden">
+                        
+                        <div class="input-group">
+                            <h4 class="section-label">Identity & Contact</h4>
+                            <div class="input-grid">
+                                <div class="field">
+                                    <label>Full Name *</label>
+                                    <input type="text" id="full_name" placeholder="John Doe" required>
+                                </div>
+                                <div class="field">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="phone_number" placeholder="+1 (555) 000-0000">
+                                </div>
+                                <div class="field" style="grid-column: span 2;">
+                                    <label>Email Address *</label>
+                                    <input type="email" id="email" placeholder="john@domain.com" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <h4 class="section-label">Objective</h4>
+                            <div class="field">
+                                <label>Career Objective</label>
+                                <textarea id="objective" rows="3" placeholder="Write a brief statement about your career goals..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="group-header">
+                                <h4 class="section-label">Skills</h4>
+                                <button type="button" class="add-btn" id="add-skill-btn">+ Add Category</button>
+                            </div>
+                            <div id="skills-list"></div>
+                            <p class="field-hint">Example: Category "Frontend" -> Skills "React, Vue, CSS"</p>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="group-header">
+                                <h4 class="section-label">Work Experience</h4>
+                                <button type="button" class="add-btn" id="add-exp-btn">+ Add Job</button>
+                            </div>
+                            <div id="experience-list"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="group-header">
+                                <h4 class="section-label">Projects</h4>
+                                <button type="button" class="add-btn" id="add-proj-btn">+ Add Project</button>
+                            </div>
+                            <div id="projects-list"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="group-header">
+                                <h4 class="section-label">Education</h4>
+                                <button type="button" class="add-btn" id="add-edu-btn">+ Add Education</button>
+                            </div>
+                            <div id="education-list"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="group-header">
+                                <h4 class="section-label">Certificates</h4>
+                                <button type="button" class="add-btn" id="add-cert-btn">+ Add Certificate</button>
+                            </div>
+                            <div id="certificates-list"></div>
+                        </div>
+                    </div>
+
+                    <div id="quick-fields" class="form-section hidden">
+                        <div class="field">
+                            <label>Paste Existing Resume Content</label>
+                            <textarea id="rawContent" rows="12" placeholder="Paste your profile text here..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="primary-btn">Generate JSON (Schema Valid)</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
