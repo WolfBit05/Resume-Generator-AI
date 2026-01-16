@@ -1,7 +1,7 @@
 from pydantic import BaseSettings
 
 class Settings(BaseSettings):
-    hf_api_key: str
+    hf_api_key: str = "meta-llama/Meta-Llama-3-8B-Instruct"
 
     class Config:
         env_file = ".env"
