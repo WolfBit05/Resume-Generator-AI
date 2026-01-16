@@ -1,14 +1,21 @@
+from settings import settings
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import json
 
 MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+tokenizer = AutoTokenizer.from_pretrained(
+    MODEL_ID,
+    torch_dtype=torch.float16,
+    device_map="auto",
+    token = settings.hf_api_key)
+
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_ID,
     torch_dtype=torch.float16,
-    device_map="auto"
+    device_map="auto",
+    token = settings.hf_api_key
 )
 
 SYSTEM_PROMPT = """

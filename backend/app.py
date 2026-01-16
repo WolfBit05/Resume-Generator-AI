@@ -31,7 +31,7 @@ def generate_resume_api(request: ResumeRequest):
         **request.user_data.model_dump()
     }
 
-    resume_text, = generate_resume(user_profile)
+    resume_text = generate_resume(user_profile)
 
     return {
         "status": "success",
