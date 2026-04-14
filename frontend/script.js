@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     backBtn.addEventListener('click', () => formOverlay.classList.add('hidden'));
 
     // --- JSON Generation ---
-    resumeForm.addEventListener('submit', (e) => {
+    resumeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const output = {
@@ -239,25 +239,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll('.exp-entry').forEach(row => {
-            const comp = row.querySelector('.e-company').value;
-            if (comp) {
+            const org = row.querySelector('.e-company').value;
+            if (org) {
                 output.experience.push({
-                    company: comp,
-                    role: row.querySelector('.e-role').value,
-                    description: row.querySelector('.e-desc').value
+            role: row.querySelector('.e-role').value,
+            organization: org,
+            responsibilities: row.querySelector('.e-desc').value
+                ? [row.querySelector('.e-desc').value]
+                : []
                 });
             }
         });
 
+
         document.querySelectorAll('.proj-entry').forEach(row => {
-            const name = row.querySelector('.p-name').value;
-            if (name) {
+        const title = row.querySelector('.p-name').value;
+            if (title) {
                 output.projects.push({
-                    name: name,
-                    description: row.querySelector('.p-desc').value
+                    title: title,
+                    description: row.querySelector('.p-desc').value,
+                    technologies: []
                 });
             }
         });
+
+
 
         document.querySelectorAll('.edu-entry').forEach(row => {
             const inst = row.querySelector('.ed-inst').value;
@@ -270,22 +276,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll('.cert-entry').forEach(row => {
-            const name = row.querySelector('.c-name').value;
-            if (name) output.certificates.push(name);
+        const name = row.querySelector('.c-name').value;
+            if (name) {
+                output.certificates.push({
+                    name: name
+                });
+            }
         });
 
-        console.log("FINAL JSON OUTPUT:", output);
-        
-        formOverlay.classList.add('hidden');
-        const botMsg = document.createElement('div');
-        botMsg.className = 'message bot';
-        botMsg.innerHTML = `
-            <div class="avatar">AI</div>
-            <div class="bubble" style="border-color: var(--success);">
-                <p>✅ <b>JSON Generated Successfully!</b></p>
-                <p class="secondary">Check the browser console (F12) to view the schema-compliant object.</p>
-            </div>`;
-        messagesContainer.appendChild(botMsg);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    try {
+            const res = await fetch("http://localhost:8000/generate-resume", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                role_target: "Machine Learning Engineer",
+                constraints: {
+                    resume_length: "1_page",
+                    region: "India",
+                    tone: "Formal"
+                },
+                user_data: output
+                })
+            });
+
+            const data = await res.json();
+
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message bot';
+            botMsg.innerHTML = `
+                <div class="avatar">AI</div>
+                <div class="bubble">
+                    <pre>${data.resume}</pre>
+                </div>`;
+            messagesContainer.appendChild(botMsg);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        } catch (err) {
+            console.error("Resume generation failed:", err);
+            alert("Backend error. Check server logs.");
+        }
     });
 });

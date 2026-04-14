@@ -1,8 +1,8 @@
-# ResumAI Pro | Professional AI Resume Builder Frontend
+# Resume-Generator-Ai
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-**ResumAI Pro** is a modern, responsive, and schema-compliant frontend application designed to collect professional resume data. It features a sleek interface with Dark/Light mode support, dynamic form fields, and strictly structured JSON output optimized for backend processing.
+**Resume-Generator-Ai** is a modern, responsive, and schema-compliant frontend application designed to collect professional resume data. It features a sleek interface with Dark/Light mode support, dynamic form fields, and strictly structured JSON output optimized for backend processing.
 
 ## 🚀 Features
 
