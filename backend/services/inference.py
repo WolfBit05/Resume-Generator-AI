@@ -1,68 +1,3 @@
-from settings import settings
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-import torch
-import json
-from huggingface_hub import login, whoami
-
-# HF login (optional but ok)
-login(token=settings.hf_token)
-#print(whoami())
-
-MODEL_ID = "google/flan-t5-small"  # safest for 8GB RAM
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-
-model = AutoModelForSeq2SeqLM.from_pretrained(
-    MODEL_ID,
-    dtype=torch.float32,      # CPU safe
-).to("cpu")
-
-SYSTEM_PROMPT = """
-You are a professional ATS-optimized resume generator.
-
-Rules:
-- Use ONLY provided data.
-- Do NOT hallucinate.
-- Bullet points only.
-- No first person.
-- ATS friendly.
-"""
-
-def build_user_prompt(user_profile: dict) -> str:
-    data = user_profile.get("user_data", {})
-
-    return f"""
-Convert the following data into a professional resume.
-
-Format strictly in markdown.
-
-Use '-' for bullet points.
-
-Full Name: {data.get("personal_info", {}).get("full_name")}
-Email: {data.get("personal_info", {}).get("email")}
-Phone: {data.get("personal_info", {}).get("phone_number")}
-
-Objective:
-{data.get("objective")}
-
-Skills:
-{data.get("skills")}
-
-Experience:
-{data.get("experience")}
-
-Projects:
-{data.get("projects")}
-
-Education:
-{data.get("education")}
-
-Certificates:
-{data.get("certificates")}
-
-Resume:
-"""
-
 def generate_resume(user_profile: dict) -> str:
     data = user_profile.get("user_data", {})
 
@@ -73,7 +8,7 @@ def generate_resume(user_profile: dict) -> str:
     resume_lines.append(f"# {pi.get('full_name')}")
     resume_lines.append(f"{pi.get('email')} | {pi.get('phone_number')}\n")
 
-    # Objective
+    # Objective 
     resume_lines.append("## Objective")
     resume_lines.append(f"- {data.get('objective')}\n")
 
@@ -112,7 +47,7 @@ def generate_resume(user_profile: dict) -> str:
     return "\n".join(resume_lines)
 
 
-
+# saveral days old code
 '''from settings import settings
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
