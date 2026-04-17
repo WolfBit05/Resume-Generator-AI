@@ -1,5 +1,9 @@
 fastapi>=0.110.0
 pydantic>=2.5.0
-transformers>=4.36.0
-torch>=2.1.0
+pydantic-settings>=2.0.0
 uvicorn>=0.25.0
+requests>=2.31.0
+# Removed: transformers, torch — Ollama handles model serving
+# transformers>=4.36.0
+# torch>=2.1.0
+
