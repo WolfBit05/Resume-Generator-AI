@@ -44,6 +44,12 @@ def generate_resume(user_profile: dict) -> str:
             f"- {edu.get('degree')}, {edu.get('institution')} ({edu.get('year')})"
         )
 
+    # in generate_resume(), after Education section
+    resume_lines.append("\n## Certifications")
+    for cert in data.get("certificates", []):
+        issuer = f", {cert.get('issuer')}" if cert.get('issuer') else ""
+        resume_lines.append(f"- {cert.get('name')}{issuer}")
+
     return "\n".join(resume_lines)
 
 

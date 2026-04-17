@@ -2,9 +2,12 @@ import re
 
 STRONG_VERBS = [
     "built", "developed", "engineered", "optimized",
-    "implemented", "designed", "automated",
-    "improved", "increased", "reduced", "deployed"
+    "implemented", "designed", "automated", "improved",
+    "increased", "reduced", "deployed", "boosted",
+    "streamlined", "analyzed", "achieved", "managed",
+    "delivered", "led", "created", "established"
 ]
+
 
 WEAK_VERBS = [
     "worked on", "responsible for", "helped",
@@ -29,7 +32,7 @@ def evaluate_resume(markdown: str):
     for b in bullets
     )
     passive_hits = sum(
-        " was " in b.lower() or " were " in b.lower()
+        bool(re.search(r"\b(was|were|been|being)\b", b.lower()))
         for b in bullets
     )
 
@@ -47,7 +50,7 @@ def evaluate_resume(markdown: str):
         30 * impact_density +
         20 * (1 - passive_ratio) +
         20 * min(total / 10, 1) -
-        20 * (weak_hits / total)
+        15 * (weak_hits / total)
     )
 
     overall = max(0, min(100, overall))
